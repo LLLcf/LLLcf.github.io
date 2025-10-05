@@ -9,8 +9,7 @@ author: 炼丹怪
 
 ##### *初赛第二名技术方案*
 
-[基于文本的违禁词分类挑战赛](https://challenge.xfyun.cn/topic/info?type=prohibited-words-classification)
-
+*比赛链接*：[基于文本的违禁词分类挑战赛](https://challenge.xfyun.cn/topic/info?type=prohibited-words-classification)
 
 
 ## 1. 前置数据分析
