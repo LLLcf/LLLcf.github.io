@@ -1,8 +1,8 @@
-name: "Pianfan's blog"
-description: "翩帆的个人技术博客"
+name: "lcfff's blog"
+description: "炼丹怪的个人博客"
 
-avatar: https://pianfan.github.io/images/avatar.jpg
-favicon: https://pianfan.github.io/images/favicon.ico
+avatar: https://lcfff.github.io/images/avatar.jpg
+favicon: https://lcfff.github.io/images/favicon.ico
 
 navigation:
   - name: 首页
@@ -17,17 +17,17 @@ paginate: 8
 excerpt_separator: <!-- more -->
 
 footer-links:
-  zhihu: 
-  email: xiongyunhan@outlook.com
+  zhihu: zhihu.com/people/lcfff_0705
+  email: 15002795682@163.com
   facebook:
-  github: pianfan
+  github: LLLcf
   rss: # just type anything here for a working RSS icon
   twitter: 
   youtube:
 
-footer-text: Copyright (c) 2024 Pianfan
+footer-text: Copyright (c) 2025 Lcfff
 
-url: https://pianfan.github.io
+url: https://lcfff.github.io
 
 permalink: /:title/
 paginate_path: /page:num/
