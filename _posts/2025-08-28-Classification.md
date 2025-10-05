@@ -7,7 +7,8 @@ comments: true
 author: 炼丹怪
 ---
 
-![基于文本的违禁词分类挑战赛](https://challenge.xfyun.cn/topic/info?type=prohibited-words-classification)
+[基于文本的违禁词分类挑战赛](https://challenge.xfyun.cn/topic/info?type=prohibited-words-classification)
+
 ## 1. 前置数据分析
 
 - **任务描述**：本质上是一个十分类的不均衡样本数据集，采用Macro F1-score进行模型评价
