@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "基于文本的违禁词分类挑战赛"
-date:   2025-10-06
+date:   2025-08-28
 tags: [NLP, 文本分类]
 comments: true
 author: 炼丹怪
