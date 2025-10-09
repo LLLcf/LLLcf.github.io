@@ -64,8 +64,8 @@ exclude:
 
 # Gitalk 评论系统配置
 gitalk:
-  clientID: "你的GitHub OAuth Client ID"
-  clientSecret: "你的GitHub OAuth Client Secret"
+  clientID: "Ov23licU6mbTJ3uvoJCT"
+  clientSecret: "2e525b54587563534fcd1b1c30d3c3e70f79c33e"
   repo: "LLLcf.github.io"  # 评论存储的仓库（通常是博客仓库）
   owner: "LLLcf"           # 仓库所有者GitHub用户名
   admin: ["LLLcf"]         # 有权管理评论的用户
