@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Embedding解读"
+title: "Embedding-从过去到现在"
 date:   2025-10-07
 tags: [NLP]
 comments: true
@@ -409,5 +409,133 @@ results_bm25 [(0, 3.6708436530427986, 'RAG（Retrieval-Augmented Generation）�
 ### 3. Word2Vec
 
 将单词转换为Embedding的网络架构，通过定义并优化辅助目标(CBOW 预测中间缺失词；Skipgram 预测相邻单词)实现。
-网络训练完成后，将最后一层抛弃，**找出Embedding向量是真正的目标**
+网络训练完成后，将最后一层抛弃，**得到Embedding向量是真正的目标**
 ![CBOW示例](https://LLLcf.github.io/images/CBOW.png)
+
+Word2Vec 能够捕捉词语的语义关系
+#### 3.1 word2vec训练代码实现
+```python
+import numpy as np
+import math
+import re
+from collections import defaultdict
+import jieba
+from gensim.models import Word2Vec
+
+class Word2VecRetrieval:
+    def __init__(self, use_jieba=True, vector_size=100, window=2, min_count=1, workers=2):
+        self.use_jieba = use_jieba
+        self.vector_size = vector_size
+        self.window = window
+        self.min_count = min_count
+        self.workers = workers
+        self.model = None
+        self.documents = []
+        self.doc_vectors = []
+        self.vocabulary = set()
+        if self.use_jieba:
+            jieba.add_word('RAG')
+            jieba.add_word('Retrieval')
+            jieba.add_word('Augmented')
+            jieba.add_word('Generation')
+            jieba.add_word('Passage')
+            jieba.add_word('seq2seq')
+            jieba.add_word('BERT')
+            jieba.add_word('GPT')
+            jieba.add_word('Transformer')
+            jieba.add_word('NLP')
+    
+    def preprocess_text(self, text):
+        text = text.lower()
+        if self.use_jieba:
+            words = list(jieba.cut(text))
+        else:
+            text = re.sub(r'[^\w\s]', ' ', text)
+            words = text.split()
+        processed_words = []
+        for word in words:
+            word = word.strip()
+            if not word:
+                continue
+            if re.match(r'^[a-z0-9\u4e00-\u9fff]+$', word):
+                processed_words.append(word)
+        return processed_words
+    
+    def fit(self, documents):
+        self.documents = documents
+        tokenized_docs = []
+        for doc in documents:
+            words = self.preprocess_text(doc)
+            tokenized_docs.append(words)
+            self.vocabulary.update(words)
+        self.model = Word2Vec(
+            sentences=tokenized_docs,
+            vector_size=self.vector_size,
+            window=self.window,
+            min_count=self.min_count,
+            workers=self.workers,
+            sg=0
+        )
+        self.doc_vectors = self._compute_document_vectors(tokenized_docs)
+        return tokenized_docs
+    
+    def _compute_document_vectors(self, tokenized_docs):
+        doc_vectors = []
+        for words in tokenized_docs:
+            word_vectors = []
+            for word in words:
+                if word in self.model.wv:
+                    word_vectors.append(self.model.wv[word])
+            if len(word_vectors) > 0:
+                doc_vector = np.mean(word_vectors, axis=0)
+            else:
+                doc_vector = np.zeros(self.vector_size)
+            doc_vectors.append(doc_vector)
+        return doc_vectors
+    
+    def _query_to_vector(self, query):
+        words = self.preprocess_text(query)
+        word_vectors = []
+        for word in words:
+            if word in self.model.wv:
+                word_vectors.append(self.model.wv[word])
+        if len(word_vectors) > 0:
+            return np.mean(word_vectors, axis=0)
+        else:
+            return np.zeros(self.vector_size)
+    
+    def _cosine_similarity(self, vec1, vec2):
+        if np.linalg.norm(vec1) == 0 or np.linalg.norm(vec2) == 0:
+            return 0.0
+        return np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
+    
+    def score(self, query, doc_index):
+        if doc_index >= len(self.documents):
+            return 0
+        query_vector = self._query_to_vector(query)
+        doc_vector = self.doc_vectors[doc_index]
+        return self._cosine_similarity(query_vector, doc_vector)
+    
+    def search(self, query, top_k=None):
+        scores = []
+        for i in range(len(self.documents)):
+            score = self.score(query, i)
+            scores.append((i, score, self.documents[i]))
+        scores.sort(key=lambda x: x[1], reverse=True)
+        if top_k is not None:
+            return scores[:top_k]
+        else:
+            return scores
+```
+
+#### 3.2 示例检索
+```python
+w2v_retrieval = Word2VecRetrieval(use_jieba=True, vector_size=100, min_count=1)
+tokenized_docs = w2v_retrieval.fit(doc_contents)
+results_w2v = w2v_retrieval.search(query)
+```
+
+#### 2.4 检索结果
+```python
+results_w2v [(0, 0.5339111, 'RAG（Retrieval-Augmented Generation）技术是一种结合检索和生成的混合模型。它的技术概要包括三个核心组件：检索器从大规模知识库中检索相关文档，生成器基于检索到的信息生成回答，重排模块对结果进行优化。RAG能够有效减少大语言模型的幻觉问题，提高回答的准确性和可信度。'), (1, 0.30031347, 'RAG模型的技术架构主要分为两个阶段：检索阶段使用Dense Passage Retrieval或BM25算法从外部知识源获取相关信息，生成阶段将检索结果与原始问题结合，通过seq2seq模型生成最终答案。这种检索增强的生成方式显著提升了模型在知识密集型任务上的表现。'), (3, 0.2623386, 'Transformer架构是当前自然语言处理领域的主流模型，它基于自注意力机制，摒弃了传统的循环和卷积结构。BERT、GPT等预训练语言模型都是基于Transformer构建的，在各种NLP任务上表现出色。'), (2, 0.11050085, '深度学习是机器学习的一个分支，它基于人工神经网络，特别是深度神经网络。深度学习模型能够从大量数据中自动学习特征表示，在计算机视觉、自然语言处理等领域取得了突破性进展。'), (4, 0.101617895, '知识图谱是一种结构化的语义知识库，用于描述现实世界中的实体及其关系。它通常采用三元组形式存储数据，在智能搜索、推荐系统、问答系统等应用中发挥着重要作用。')]
+```
