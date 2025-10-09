@@ -62,3 +62,9 @@ exclude:
   - LICENSE
   - README.md
 
+gitalk:
+  clientID: "你的Client ID"
+  clientSecret: "你的Client Secret"
+  repo: "LLLcf.github.io"  # 存放评论的仓库名
+  owner: "LLLcf"  # 仓库所有者用户名
+  admin: ["LLLcf"]  # 管理员用户名
