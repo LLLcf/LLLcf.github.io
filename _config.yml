@@ -62,9 +62,10 @@ exclude:
   - LICENSE
   - README.md
 
+# Gitalk 评论系统配置
 gitalk:
-  clientID: "你的Client ID"
-  clientSecret: "你的Client Secret"
-  repo: "LLLcf.github.io"  # 存放评论的仓库名
-  owner: "LLLcf"  # 仓库所有者用户名
-  admin: ["LLLcf"]  # 管理员用户名
+  clientID: "你的GitHub OAuth Client ID"
+  clientSecret: "你的GitHub OAuth Client Secret"
+  repo: "LLLcf.github.io"  # 评论存储的仓库（通常是博客仓库）
+  owner: "LLLcf"           # 仓库所有者GitHub用户名
+  admin: ["LLLcf"]         # 有权管理评论的用户

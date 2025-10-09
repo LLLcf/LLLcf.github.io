@@ -2,19 +2,26 @@
 <div class="comments">
     <div id="gitalk-container"></div>
     <script>
+        // 解决 Unicode 字符编码问题的兼容函数
+        function btoaUnicode(str) {
+            return btoa(unescape(encodeURIComponent(str)));
+        }
+
+        // 初始化 Gitalk 评论系统
         const gitalk = new Gitalk({
-          clientID: "{{ site.gitalk.clientID }}",
-          clientSecret: "{{ site.gitalk.clientSecret }}",
-          repo: "{{ site.gitalk.repo }}",
-          owner: "{{ site.gitalk.owner }}",
-          admin: ["{{ site.gitalk.owner }}"],
-          id: window.location.pathname,      // 确保唯一性且长度小于50
-          distractionFreeMode: false,  // 无干扰模式
-          title: "{{ page.title }}",
-          language: "zh-CN",
-        })
+            clientID: "{{ site.gitalk.clientID }}",
+            clientSecret: "{{ site.gitalk.clientSecret }}",
+            repo: "{{ site.gitalk.repo }}",         // 存储评论的仓库名
+            owner: "{{ site.gitalk.owner }}",       // 仓库所有者
+            admin: ["{{ site.gitalk.owner }}"],     // 管理员账号
+            id: btoaUnicode(window.location.pathname),  // 用兼容方法编码页面路径（确保唯一性）
+            title: "{{ page.title }}",              // 评论标题（使用文章标题）
+            language: "zh-CN",                      // 中文显示
+            distractionFreeMode: false,             // 关闭无干扰模式
+            createIssueManually: true               // 当评论不存在时手动创建Issue
+        });
         
-        gitalk.render('gitalk-container')
+        gitalk.render('gitalk-container');
     </script>
 </div>
 {% endif %}
