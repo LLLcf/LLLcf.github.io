@@ -7,8 +7,6 @@ comments: true
 author: 炼丹怪
 ---
 
-### Embedding解读
-
 **Embedding原理**：将文本/图片等数据抽象为向量表示，从高维向量空间中对文本/图片等信息进行语义表示。
 
 > *一个好的Embedding模型应该包含*
@@ -312,9 +310,9 @@ $$
 #### 2.2 BM25检索代码实现
 
 ```python
+# BM25实现
 class BM25:
     def __init__(self, k1=1.5, b=0.75, use_jieba=True, custom_dict=None):
-
         self.k1 = k1
         self.b = b
         self.documents = []
@@ -351,7 +349,6 @@ class BM25:
         return processed_words
     
     def fit(self, documents):
-
         self.documents = documents
         self.doc_lengths = []
         self.term_freqs = []
@@ -363,7 +360,6 @@ class BM25:
             for word in set(words):
                 self.vocabulary.add(word)
                 self.doc_freqs[word] += 1
-
         self.avg_doc_length = sum(self.doc_lengths) / len(self.doc_lengths) if self.doc_lengths else 0
         self.idf = {}
         N = len(documents)
@@ -372,7 +368,6 @@ class BM25:
             self.idf[word] = math.log((N - self.doc_freqs[word] + 0.5) / (self.doc_freqs[word] + 0.5) + 1)
     
     def score(self, query, doc_index):
-
         if doc_index >= len(self.documents):
             return 0
         words = self.preprocess_text(query)
@@ -390,7 +385,6 @@ class BM25:
         return score
     
     def search(self, query, top_k=None):
-
         scores = []
         for i in range(len(self.documents)):
             score = self.score(query, i)
