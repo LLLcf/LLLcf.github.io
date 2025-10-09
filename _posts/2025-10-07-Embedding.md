@@ -276,7 +276,7 @@ results_tfidf [(0, 0.2755555303106965, 'RAG（Retrieval-Augmented Generation）�
 BM25（Best Match 25）是一种广泛用于信息检索的排名函数，其公式如下：
 
 $$
-\text{BM25}(q, d) = \sum_{t \in q} \text{IDF}(t) \cdot \frac{f(t, d) \cdot (k_1 + 1)}{f(t, d) + k_1 \cdot \left(1 - b + b \cdot \frac{|d|}{\text{avg\_len\_d}}\right)}
+\text{BM25}(q, d) = \sum_{t \in q} \text{IDF}(t) \cdot \frac{f(t, d) \cdot (k_1 + 1)}{f(t, d) + k_1 \cdot \left(1 - b + b \cdot \frac{d}{\text{avgd}}\right)}
 $$
 
 ##### 公式参数说明
@@ -284,8 +284,8 @@ $$
 - $ q $：查询（query），由若干词项 $ t $ 组成
 - $ d $：文档（document）
 - $ f(t, d) $：词项 $ t $ 在文档 $ d $ 中的出现频次（term frequency）
-- $ |d| $：文档 $ d $ 的长度（通常以词数计）
-- $ \text{avg\_len\_d} $：语料库中所有文档的平均长度
+- $ d $：文档 $ d $ 的长度（通常以词数计）
+- $ avg_d $：语料库中所有文档的平均长度
 - $ k_1 $ 和 $ b $：可调超参数，通常 $ k_1 \in [1.2, 2.0] $，$ b = 0.75 $
 - $ \text{IDF}(t) $：词项 $ t $ 的逆文档频率
 
