@@ -471,24 +471,12 @@ class Word2VecRetrieval:
 #### 4.1 BERT（Encoder-only架构）
 BERT中的CLS token用于表示输入文本的语义结果，可利用CLS结果计算语义相似度以实现检索功能。
 ```python
-import torch
-import numpy as np
-from transformers import AutoTokenizer, AutoModel
-from typing import List, Tuple, Optional, Dict
-import math
-from collections import defaultdict
-import logging
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
+# bert
 class BERTRetrieval:
     def __init__(self, model_path: str = "bert-base-uncased", max_length: int = 512, device: str = None):
-
         self.model_path = model_path
         self.max_length = max_length
         self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
-
         self.tokenizer = None
         self.model = None
         self.documents = []
@@ -496,7 +484,6 @@ class BERTRetrieval:
         self._initialize_model()
     
     def _initialize_model(self):
-    
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_path)
         self.model = AutoModel.from_pretrained(self.model_path)
         self.model.eval()
@@ -515,15 +502,12 @@ class BERTRetrieval:
             outputs = self.model(**inputs)
             embeddings = outputs.last_hidden_state[:, 0, :]
             embeddings = torch.nn.functional.normalize(embeddings, p=2, dim=1)
-        
         return embeddings.cpu()
     
     def encode_texts(self, texts: List[str], batch_size: int = 32) -> torch.Tensor:
         all_embeddings = []
-        
         for i in range(0, len(texts), batch_size):
             batch_texts = texts[i:i + batch_size]
-
             inputs = self.tokenizer(
                 batch_texts,
                 padding=True,
@@ -531,18 +515,13 @@ class BERTRetrieval:
                 max_length=self.max_length,
                 return_tensors="pt"
             )
-            
             inputs = {k: v.to(self.device) for k, v in inputs.items()}
-            
-            # 推理
             with torch.no_grad():
                 outputs = self.model(**inputs)
                 embeddings = outputs.last_hidden_state[:, 0, :]
                 embeddings = torch.nn.functional.normalize(embeddings, p=2, dim=1)
                 all_embeddings.append(embeddings.cpu())
-        
         return torch.cat(all_embeddings, dim=0)
-
     
     def fit(self, documents: List[str], batch_size: int = 32):
         self.documents = documents
@@ -565,7 +544,6 @@ class BERTRetrieval:
         return similarity
     
     def search(self, query: str, top_k: Optional[int] = None) -> List[Tuple[int, float, str]]:
-
         if self.document_embeddings is None:
             raise ValueError("请先调用fit方法处理文档")
         query_embedding = self.encode_text(query)
