@@ -471,7 +471,120 @@ class Word2VecRetrieval:
 #### 4.1 BERT（Encoder-only架构）
 BERT中的CLS token用于表示输入文本的语义结果，可利用CLS结果计算语义相似度以实现检索功能。
 ```python
+import torch
+import numpy as np
+from transformers import AutoTokenizer, AutoModel
+from typing import List, Tuple, Optional, Dict
+import math
+from collections import defaultdict
+import logging
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+class BERTRetrieval:
+    def __init__(self, model_path: str = "bert-base-uncased", max_length: int = 512, device: str = None):
+
+        self.model_path = model_path
+        self.max_length = max_length
+        self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
+
+        self.tokenizer = None
+        self.model = None
+        self.documents = []
+        self.document_embeddings = None
+        self._initialize_model()
+    
+    def _initialize_model(self):
+    
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_path)
+        self.model = AutoModel.from_pretrained(self.model_path)
+        self.model.eval()
+        self.model.to(self.device)
+    
+    def encode_text(self, text: str) -> torch.Tensor:
+        inputs = self.tokenizer(
+            text,
+            padding=True,
+            truncation=True,
+            max_length=self.max_length,
+            return_tensors="pt"
+        )
+        inputs = {k: v.to(self.device) for k, v in inputs.items()}
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+            embeddings = outputs.last_hidden_state[:, 0, :]
+            embeddings = torch.nn.functional.normalize(embeddings, p=2, dim=1)
+        
+        return embeddings.cpu()
+    
+    def encode_texts(self, texts: List[str], batch_size: int = 32) -> torch.Tensor:
+        all_embeddings = []
+        
+        for i in range(0, len(texts), batch_size):
+            batch_texts = texts[i:i + batch_size]
+
+            inputs = self.tokenizer(
+                batch_texts,
+                padding=True,
+                truncation=True,
+                max_length=self.max_length,
+                return_tensors="pt"
+            )
+            
+            inputs = {k: v.to(self.device) for k, v in inputs.items()}
+            
+            # 推理
+            with torch.no_grad():
+                outputs = self.model(**inputs)
+                embeddings = outputs.last_hidden_state[:, 0, :]
+                embeddings = torch.nn.functional.normalize(embeddings, p=2, dim=1)
+                all_embeddings.append(embeddings.cpu())
+        
+        return torch.cat(all_embeddings, dim=0)
+
+    
+    def fit(self, documents: List[str], batch_size: int = 32):
+        self.documents = documents
+        self.document_embeddings = self.encode_texts(documents, batch_size)
+        return self.document_embeddings
+    
+    def _cosine_similarity(self, vec1: torch.Tensor, vec2: torch.Tensor) -> float:
+        if vec1.dim() == 1:
+            vec1 = vec1.unsqueeze(0)
+        if vec2.dim() == 1:
+            vec2 = vec2.unsqueeze(0)
+        return torch.nn.functional.cosine_similarity(vec1, vec2).item()
+    
+    def score(self, query: str, doc_index: int) -> float:
+        if doc_index >= len(self.documents) or self.document_embeddings is None:
+            return 0.0
+        query_embedding = self.encode_text(query)
+        doc_embedding = self.document_embeddings[doc_index]
+        similarity = self._cosine_similarity(query_embedding, doc_embedding)
+        return similarity
+    
+    def search(self, query: str, top_k: Optional[int] = None) -> List[Tuple[int, float, str]]:
+
+        if self.document_embeddings is None:
+            raise ValueError("请先调用fit方法处理文档")
+        query_embedding = self.encode_text(query)
+        similarities = torch.nn.functional.cosine_similarity(
+            query_embedding, 
+            self.document_embeddings
+        ).tolist()
+        results = []
+        for i, similarity in enumerate(similarities):
+            results.append((i, similarity, self.documents[i]))
+        results.sort(key=lambda x: x[1], reverse=True)
+        if top_k is not None:
+            return results[:top_k]
+        else:
+            return results
+
+class ChineseBERTRetrieval(BERTRetrieval):
+    def __init__(self, model_path: str = "bert-base-chinese", **kwargs):
+        super().__init__(model_path=model_path, **kwargs)
 ```
 
 #### 4.2 Qwen3_Embedding（Decoder-only架构）
