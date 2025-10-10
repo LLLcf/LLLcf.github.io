@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Embedding-从过去到现在(含代码实现检索)"
+title: "Embedding-从过去到现在(含代码实现检索任务)"
 date:   2025-10-07
 tags: [NLP]
 comments: true
