@@ -42,9 +42,6 @@ import jieba
 
 class TFIDF:
     def __init__(self, use_jieba=True, custom_dict=None):
-        """
-        TF-IDF 实现，类BM25风格
-        """
         self.vocabulary = set()
         self.idf = {}
         self.doc_count = 0
@@ -131,7 +128,6 @@ class TFIDF:
             self.idf[word] = math.log(self.doc_count / (self.doc_term_count[word] + 1))
 
         self.doc_vectors = self._compute_document_vectors(documents)
-        
         return doc_words_list
     
     def _compute_document_vectors(self, documents):
@@ -139,7 +135,6 @@ class TFIDF:
         for doc in documents:
             words = self.preprocess_text(doc)
             tf = self.compute_tf(words)
-            
             tfidf_vector = {}
             for word in self.vocabulary:
                 tf_value = tf.get(word, 0)
@@ -210,7 +205,6 @@ class TFIDF:
         for i in range(len(self.documents)):
             score = self.score(query, i)
             scores.append((i, score, self.documents[i]))
-        # 按得分降序排序
         scores.sort(key=lambda x: x[1], reverse=True)
         if top_k is not None:
             return scores[:top_k]
@@ -310,7 +304,6 @@ class BM25:
         self.idf = {}
         N = len(documents)
         for word in self.vocabulary:
-            # BM25的IDF公式
             self.idf[word] = math.log((N - self.doc_freqs[word] + 0.5) / (self.doc_freqs[word] + 0.5) + 1)
     
     def score(self, query, doc_index):
@@ -666,8 +659,6 @@ class QwenReranker:
         self.true_token = None
         self.false_token = None
         self.suffix_tokens = None
-        
-        # 初始化模型和tokenizer
         self._initialize_model()
     
     def _initialize_model(self):
