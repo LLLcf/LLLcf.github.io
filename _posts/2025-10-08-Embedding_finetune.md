@@ -611,12 +611,10 @@ df = pd.DataFrame({
 
 
 #### 7.训练和评估结果
-
-
-![learning rate 变化](https://LLLcf.github.io/images/embedding_finetune/learning_rate.png)
-![grad norm 变化](https://LLLcf.github.io/images/embedding_finetune/grad_norm.png)
-![train loss 变化](https://LLLcf.github.io/images/embedding_finetune/train_loss.png)
-![eval loss 变化](https://LLLcf.github.io/images/embedding_finetune/eval_loss.png)
+| | |
+|:---:|:---:|
+| ![learning rate 变化](https://LLLcf.github.io/images/embedding_finetune/learning_rate.png) | ![grad norm 变化](https://LLLcf.github.io/images/embedding_finetune/grad_norm.png) |
+| ![train loss 变化](https://LLLcf.github.io/images/embedding_finetune/train_loss.png) | ![eval loss 变化](https://LLLcf.github.io/images/embedding_finetune/eval_loss.png) |
 
 | 阈值 (Threshold) | 0.6B模型 F1分数 | 8B模型 F1分数 | lora_0.6B模型 F1分数 |
 |:----------------:|:---------------:|:------------:|:-------------------:|
@@ -625,7 +623,5 @@ df = pd.DataFrame({
 |       0.6        |     0.5950      |    0.6075    |       0.6516        |
 |       0.7        |     0.3748      |    0.3625    |       0.5627        |
 
-模型预测结果与阈值强相关
-LoRA微调改变了模型的预测分布，使其在高阈值下表现更优，可能更适合对 “预测可靠性” 要求高的场景
-
-
+- 1.模型预测结果与阈值强相关
+- 2.LoRA微调改变了模型的预测分布，使其在高阈值下表现更优，可能更适合对 “预测可靠性” 要求高的场景
