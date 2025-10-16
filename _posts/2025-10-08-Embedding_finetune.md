@@ -7,9 +7,11 @@ comments: true
 author: 炼丹怪
 ---
 
+
+[数据集](https://challenge.xfyun.cn/topic/info?type=open-vertical-retrieval&option=stsj)
+
 通用预训练嵌入（Embedding）模型因缺乏特定领域的专属知识，在垂直领域场景中的性能常受限制；因此，可通过模型微调手段实现预训练模型的领域适配，进而有效赋能于垂域任务。嵌入模型微调的核心，在于对模型所表征的嵌入层知识进行针对性调整，以使其更贴合领域数据的语义与特征规律。
 
-[*数据集*](https://challenge.xfyun.cn/topic/info?type=open-vertical-retrieval&option=stsj)
 
 #### 1.微调数据构造
 
@@ -622,7 +624,6 @@ df = pd.DataFrame({
 |       0.5        |     0.6480      |    0.6548    |       0.6150        |
 |       0.6        |     0.5950      |    0.6075    |       0.6516        |
 |       0.7        |     0.3748      |    0.3625    |       0.5627        |
-
 
 模型预测结果与阈值强相关
 LoRA微调改变了模型的预测分布，使其在高阈值下表现更优，可能更适合对 “预测可靠性” 要求高的场景
