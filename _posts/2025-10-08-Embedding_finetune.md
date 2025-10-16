@@ -609,13 +609,11 @@ df = pd.DataFrame({
 
 #### 7.训练和评估结果
 
-# 嵌入模型微调关键指标变化图（2*2布局）
-
 | 学习率（Learning Rate）变化 | 梯度范数（Grad Norm）变化 |
 |-----------------------------|---------------------------|
-| ![学习率变化](https://LLLcf.github.io/images/embedding_finetune/learning_rate.png) <br> **核心指标：学习率波动趋势** | ![梯度范数变化](https://LLLcf.github.io/images/embedding_finetune/grad_norm.png) <br> **核心指标：梯度稳定性** |
+| ![学习率变化](https://LLLcf.github.io/images/embedding_finetune/learning_rate.png) <br> **学习率趋势** | ![梯度范数变化](https://LLLcf.github.io/images/embedding_finetune/grad_norm.png) <br> **核梯度变化** |
 | 训练损失（Train Loss）变化  | 验证损失（Eval Loss）变化  |
-| ![训练损失变化](https://LLLcf.github.io/images/embedding_finetune/train_loss.png) <br> **核心指标：模型拟合程度** | ![验证损失变化](https://LLLcf.github.io/images/embedding_finetune/eval_loss.png) <br> **核心指标：模型泛化能力** |
+| ![训练损失变化](https://LLLcf.github.io/images/embedding_finetune/train_loss.png) <br> **训练Loss 变化** | ![验证损失变化](https://LLLcf.github.io/images/embedding_finetune/eval_loss.png) <br> **测试Loss 变化** |
 
 
 | 阈值 (Threshold) | 0.6B模型 F1分数 | 8B模型 F1分数 | lora_0.6B模型 F1分数 |
