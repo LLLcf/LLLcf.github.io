@@ -136,7 +136,6 @@ print("\n难负样本构建完成！")
 ```
 ---
 
----
 #### 2.模型原始和微调代码
 
 0.6B模型代码
@@ -464,7 +463,6 @@ class MultiNegEmbeddingTrainer(Trainer):
 ```
 ---
 
----
 #### 3.模型微调
 采取lora微调
 ```python
@@ -562,7 +560,6 @@ def main():
 ```
 ---
 
----
 #### 4.权重合并
 ```python
 base_model_path = "/root/lanyun-fs/models/Qwen3-Embedding-0.6B"
@@ -623,9 +620,9 @@ df = pd.DataFrame({
 
 | 学习率（Learning Rate）变化 | 梯度范数（Grad Norm）变化 |
 |-----------------------------|---------------------------|
-| ![学习率变化](https://LLLcf.github.io/images/embedding_finetune/learning_rate.png) <br> **学习率趋势** | ![梯度范数变化](https://LLLcf.github.io/images/embedding_finetune/grad_norm.png) <br> **核梯度变化** |
+| ![学习率变化](https://LLLcf.github.io/images/embedding_finetune/learning_rate.png) | ![梯度范数变化](https://LLLcf.github.io/images/embedding_finetune/grad_norm.png) |
 | 训练损失（Train Loss）变化  | 验证损失（Eval Loss）变化  |
-| ![训练损失变化](https://LLLcf.github.io/images/embedding_finetune/train_loss.png) <br> **训练Loss 变化** | ![验证损失变化](https://LLLcf.github.io/images/embedding_finetune/eval_loss.png) <br> **测试Loss 变化** |
+| ![训练损失变化](https://LLLcf.github.io/images/embedding_finetune/train_loss.png)| ![验证损失变化](https://LLLcf.github.io/images/embedding_finetune/eval_loss.png) |
 
 
 | 阈值 (Threshold) | 0.6B模型 F1分数 | 8B模型 F1分数 | lora_0.6B模型 F1分数 |
@@ -637,5 +634,3 @@ df = pd.DataFrame({
 
 - 1.模型预测结果与阈值强相关
 - 2.LoRA微调改变了模型的预测分布，使其在高阈值下表现更优，可能更适合对 “预测可靠性” 要求高的场景
-
----
