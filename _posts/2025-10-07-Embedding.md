@@ -339,7 +339,7 @@ class BM25:
 
 将单词转换为Embedding的网络架构，通过定义并优化辅助目标(CBOW 预测中间缺失词；Skipgram 预测相邻单词)实现。
 网络训练完成后，将最后一层抛弃，**得到Embedding向量是真正的目标**
-![CBOW示例](https://LLLcf.github.io/images/CBOW.png)
+![CBOW示例](https://LLLcf.github.io/images/embedding/CBOW.png)
 
 Word2Vec 由于训练过程中利用了上下文窗口内的信息，因此能够捕捉词语的语义关系
 

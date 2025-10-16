@@ -33,9 +33,9 @@ author: 炼丹怪
 
 ### 二、文本数据的长度分布
 
-![训练集样本长度分布](https://LLLcf.github.io/images/train_len.png)
+![训练集样本长度分布](https://LLLcf.github.io/images/Classification/train_len.png)
 
-![测试集样本长度分布](https://LLLcf.github.io/images/test_len.png)
+![测试集样本长度分布](https://LLLcf.github.io/images/Classification/test_len.png)
 
 - **分布一致性**：训练集与测试集的文本长度分布趋势高度一致，无明显偏移或异常差异，说明两类数据集在文本长度特征上具有良好的一致性，可减少因数据分布差异对模型训练与泛化效果的影响。
 
