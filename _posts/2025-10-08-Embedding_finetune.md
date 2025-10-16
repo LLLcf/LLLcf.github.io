@@ -136,6 +136,7 @@ print("\n难负样本构建完成！")
 ```
 ---
 
+---
 #### 2.模型原始和微调代码
 
 0.6B模型代码
@@ -461,7 +462,9 @@ class MultiNegEmbeddingTrainer(Trainer):
         )
 
 ```
+---
 
+---
 #### 3.模型微调
 采取lora微调
 ```python
@@ -557,7 +560,9 @@ def main():
     tokenizer.save_pretrained(f"{output_dir}/final_tokenizer")
     print(f"模型已保存至 {output_dir}")
 ```
+---
 
+---
 #### 4.权重合并
 ```python
 base_model_path = "/root/lanyun-fs/models/Qwen3-Embedding-0.6B"
@@ -569,7 +574,9 @@ model = model.merge_and_unload()
 model.save_pretrained("merged_model/Qwen3-Embedding-0.6B")
 tokenizer.save_pretrained("merged_model/Qwen3-Embedding-0.6B")
 ```
+---
 
+---
 #### 5.消融比较
 评估代码
 ```python
@@ -609,7 +616,9 @@ df = pd.DataFrame({
     'scores_base': scores_base,   
 })
 ```
+---
 
+---
 #### 7.训练和评估结果
 
 | 学习率（Learning Rate）变化 | 梯度范数（Grad Norm）变化 |
@@ -628,3 +637,5 @@ df = pd.DataFrame({
 
 - 1.模型预测结果与阈值强相关
 - 2.LoRA微调改变了模型的预测分布，使其在高阈值下表现更优，可能更适合对 “预测可靠性” 要求高的场景
+
+---
