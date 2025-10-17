@@ -432,7 +432,7 @@ img {
 
 .site-description {
   margin: 15px auto;
-  color: $base-lighten-color;
+  color: $oc-grape-9; // 改为葡萄色系深色
   font-size: 16px;
 
   @include mobile {
