@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-Lcfff 不知名NLP算法工程师
+Lcfff 不知名NLP/LLM算法工程师
 
 希望成为一个炼丹怪
 
