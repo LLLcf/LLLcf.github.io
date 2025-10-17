@@ -340,6 +340,7 @@ img {
   }
 }
 
+
 .sidebar {
   padding: 20px 0;
 
@@ -427,13 +428,34 @@ nav {
 
 // content
 
+// .wrapper-content {
+//   float: right;
+//   width: 70%;
+
+//   @include mobile {
+//     float: none;
+//     width: 100%;
+//   }
+// }
+
 .wrapper-content {
+  // 保留原布局属性（调整宽度为80%后）
   float: right;
   width: 80%;
 
+  // 优化背景样式，解决拉伸问题
+  background-color: $background-color;
+  background-image: url('https://LLLcf.github.io/images/background.png');
+  background-repeat: no-repeat;
+  background-position: center center; // 始终居中显示
+  background-size: cover; // 保持图片比例，覆盖容器（关键）
+  background-attachment: fixed; // 背景相对视口固定，不随内容滚动（核心解决拉伸）
+
+  // 移动端适配
   @include mobile {
     float: none;
     width: 100%;
+    background-attachment: scroll; // 移动端恢复随内容滚动，避免兼容性问题
   }
 }
 
@@ -724,4 +746,6 @@ footer {
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
-@import "gitalk";
+//@import "gitalk";
+
+
