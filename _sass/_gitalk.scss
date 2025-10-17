@@ -206,8 +206,11 @@
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
-    background-color: #f6f8fa;
+    background-color: $code-background-color; // 使用深色背景变量
+    color: $code-text-color; // 确保文字颜色与背景对比
     border-radius: 3px;
+    // 可选：添加边框增强区分度
+    border: 1px solid $oc-gray-8;
   }
   
   .markdown-body pre code {
