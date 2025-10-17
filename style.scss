@@ -664,26 +664,6 @@ nav {
   }
 }
 
-  > .next {
-    float: right;
-    text-align: right;
-    width: 50%;
-    a {
-      color: $base-lighten-color;
-      border: 1px solid $divider-color;
-      padding: 10px 20px;
-      background: $background-color;
-
-      &:hover, &:focus {
-        color: $link-lighten-color;
-        border: 1px solid $link-lighten-color;
-        background-color: $link-bghv-color;
-      }
-    }
-  }
-}
-
-
 // Tags
 .tags > .label {
   > li:before {
