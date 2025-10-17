@@ -439,30 +439,23 @@ nav {
 // }
 
 .wrapper-content {
-  width: 30%;
-  -webkit-background-size: cover;
-  background-size: cover;
-  background-color: $background-color; /* 保留变量作为 fallback */
+  // 保留原布局属性（关键！）
+  float: right;
+  width: 70%;
+
+  // 添加背景样式
+  background-color: $background-color; /* 变量 fallback */
   background-image: url('https://LLLcf.github.io/images/background.png');
   background-repeat: no-repeat;
   background-position: center;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: fixed;
-  z-index: 4; /* 保持较高层级 */
-  border-right: 1px solid $divider-color;
+  background-size: cover; /* 覆盖内容区 */
 
-  /* 侧边栏半透明背景（叠加在背景图上） */
-  background-color: rgba(255, 255, 255, 0.85);
-
+  // 移动端适配（保持布局正确）
   @include mobile {
+    float: none;
     width: 100%;
-    height: auto;
-    padding-bottom: 24px;
-    position: relative;
-    border-bottom: 1px solid $divider-color;
-    border-right: 0;
+    // 移动端可调整背景（如取消固定背景）
+    background-attachment: scroll;
   }
 }
 
