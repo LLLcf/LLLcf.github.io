@@ -19,8 +19,25 @@ $helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $georgia: Georgia, serif;
 
 // Fonts
-$base-font: "Noto Serif","PT Serif",source-han-serif-sc, "Source Han Serif SC", "Source Han Serif CN", "Source Han Serif TC", "Source Han Serif TW", "Source Han Serif","Songti SC", SimSon, serif;
-$code-font: 'Menlo', 'Courier New', 'Monaco', 'Spoqa Han Sans', monospace;
+// _variables.scss 中修改 $base-font 变量
+$base-font: 
+  "仿宋",          // Windows 系统默认仿宋
+  "仿宋_GB2312",   // Windows 经典仿宋（兼容性更强）
+  "PingFang SC",   // macOS 无原生仿宋，用苹方（接近衬线风格）替代
+  "WenQuanYi Zen Hei", // Linux 系统后备
+  "Noto Serif", 
+  "PT Serif", 
+  source-han-serif-sc, 
+  "Source Han Serif SC", 
+  "Source Han Serif CN", 
+  "Source Han Serif TC", 
+  "Source Han Serif TW", 
+  "Source Han Serif",
+  "Songti SC", 
+  SimSon, 
+  serif; // 最终衬线字体后备
+  
+$code-font: 'Courier New', 'Arial', 'Menlo',  'Monaco', 'Spoqa Han Sans', monospace;
 
 // Font sizes
 $base-font-size: 16px;
