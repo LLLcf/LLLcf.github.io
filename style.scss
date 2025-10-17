@@ -318,45 +318,17 @@ img {
 // .sidebar
 //
 
-// .wrapper-sidebar {
-//   width: 30%;
-// 	-webkit-background-size: cover;
-// 	background-size: cover;
-// 	background-color: $background-color;
-// 	height: 100%;
-// 	top: 0;
-// 	left:0;
-// 	position: fixed;
-// 	z-index: 4;
-//   border-right: 1px solid $divider-color;
-
-//   @include mobile {
-//     width: 100%;
-//     height: auto;
-//     padding-bottom: 24px;
-//     position: relative;
-//     border-bottom: 1px solid $divider-color;
-//     border-right: 0;
-//   }
-// }
-
 .wrapper-sidebar {
   width: 30%;
-  -webkit-background-size: cover;
-  background-size: cover;
-  background-color: $background-color; /* 保留变量作为 fallback */
-  background-image: url('https://LLLcf.github.io/images/background.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: fixed;
-  z-index: 4; /* 保持较高层级 */
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-color: $background-color;
+	height: 100%;
+	top: 0;
+	left:0;
+	position: fixed;
+	z-index: 4;
   border-right: 1px solid $divider-color;
-
-  /* 侧边栏半透明背景（叠加在背景图上） */
-  background-color: rgba(255, 255, 255, 0.85);
 
   @include mobile {
     width: 100%;
@@ -456,13 +428,41 @@ nav {
 
 // content
 
+// .wrapper-content {
+//   float: right;
+//   width: 70%;
+
+//   @include mobile {
+//     float: none;
+//     width: 100%;
+//   }
+// }
+
 .wrapper-content {
-  float: right;
-  width: 70%;
+  width: 30%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-color: $background-color; /* 保留变量作为 fallback */
+  background-image: url('https://LLLcf.github.io/images/background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 4; /* 保持较高层级 */
+  border-right: 1px solid $divider-color;
+
+  /* 侧边栏半透明背景（叠加在背景图上） */
+  background-color: rgba(255, 255, 255, 0.85);
 
   @include mobile {
-    float: none;
     width: 100%;
+    height: auto;
+    padding-bottom: 24px;
+    position: relative;
+    border-bottom: 1px solid $divider-color;
+    border-right: 0;
   }
 }
 
