@@ -1,4 +1,3 @@
-// _highlights.scss
 pre, code {
   font-family: $code-font;
   color: $code-text-color; // 统一代码文字色
@@ -6,8 +5,8 @@ pre, code {
 
 code.highlighter-rouge {
   font-size: 90%;
-  color: $oc-blue-3; // 代码内联文字用亮蓝色，增强对比
-  background-color: $code-highlight-bg; // 内联代码浅灰背景
+  color: $oc-blue-3; // 内联代码亮蓝色
+  background-color: $code-inline-bg; // 内联代码透明背景
   padding: .1em .2em;
   border-radius: 3px;
 }
@@ -15,69 +14,70 @@ code.highlighter-rouge {
 pre.highlight {
   font-size: $small-font-size;
   padding: .45em .45em .45em .625em;
-  border: 1px solid $oc-gray-8; // 边框用深灰，避免突兀
+  border: 1px solid $oc-gray-8; // 深色边框
   border-radius: 3px;
   margin: 1em 0;
   overflow: scroll;
   background-color: $code-background-color; // 代码块深色背景
 }
 
-// 修复代码高亮颜色（针对黑色背景调整对比度）
 .highlight  { background: $code-background-color; }
-.highlight .c { color: #8d99ae; font-style: italic } /* 注释：浅灰蓝色 */
-.highlight .err { color: #ff5252; background-color: rgba(255, 82, 82, 0.1) } /* 错误：亮红 + 透明红背景 */
-.highlight .k { color: #bb80b3; font-weight: bold } /* 关键字：亮紫 */
-.highlight .o { color: #9ca3af; font-weight: bold } /* 运算符：浅灰 */
-.highlight .cm { color: #8d99ae; font-style: italic } /* 多行注释 */
-.highlight .cp { color: #8d99ae; font-weight: bold } /* 预处理注释 */
-.highlight .c1 { color: #8d99ae; font-style: italic } /* 单行注释 */
-.highlight .cs { color: #8d99ae; font-weight: bold; font-style: italic } /* 特殊注释 */
-.highlight .gd { color: #ff5252; background-color: rgba(255, 82, 82, 0.1) } /* 删除线：亮红 + 透明红背景 */
-.highlight .ge { font-style: italic; color: $code-text-color } /* 强调 */
-.highlight .gr { color: #ff5252 } /* 严重错误：亮红 */
-.highlight .gh { color: #d1d5db } /* 标题：浅灰 */
-.highlight .gi { color: #38b000; background-color: rgba(56, 176, 0, 0.1) } /* 插入：亮绿 + 透明绿背景 */
-.highlight .go { color: #9ca3af } /* 输出：浅灰 */
-.highlight .gp { color: #d1d5db } /* 提示：浅灰 */
-.highlight .gs { font-weight: bold; color: $code-text-color } /* 强强调 */
-.highlight .gu { color: #d1d5db } /* 子标题：浅灰 */
-.highlight .gt { color: #ff5252 } /* 追踪：亮红 */
-.highlight .kc { color: #bb80b3; font-weight: bold } /* 常量关键字 */
-.highlight .kd { color: #bb80b3; font-weight: bold } /* 声明关键字 */
-.highlight .kp { color: #bb80b3; font-weight: bold } /* 伪关键字 */
-.highlight .kr { color: #bb80b3; font-weight: bold } /* 保留关键字 */
-.highlight .kt { color: #ffd166; font-weight: bold } /* 类型关键字：亮黄 */
-.highlight .m { color: #06d6a0 } /* 数字：亮青 */
-.highlight .s { color: #06d6a0 } /* 字符串：亮青 */
-.highlight .na { color: #118ab2 } /* 属性名：亮蓝 */
-.highlight .nb { color: #118ab2 } /* 内置变量：亮蓝 */
-.highlight .nc { color: #ffd166; font-weight: bold } /* 类名：亮黄 */
-.highlight .no { color: #118ab2 } /* 常量：亮蓝 */
-.highlight .ni { color: #ef476f } /* 实体：亮粉 */
-.highlight .ne { color: #ef476f; font-weight: bold } /* 异常：亮粉 */
-.highlight .nf { color: #06d6a0; font-weight: bold } /* 函数名：亮青 */
-.highlight .nn { color: #d1d5db } /* 命名空间：浅灰 */
-.highlight .nt { color: #bb80b3 } /* 标签：亮紫 */
-.highlight .nv { color: #d1d5db } /* 变量：浅灰 */
-.highlight .ow { color: #bb80b3; font-weight: bold } /* 运算符关键字：亮紫 */
-.highlight .w { color: #6b7280 } /* 空白：中灰 */
-.highlight .mf { color: #06d6a0 } /* 浮点数字 */
-.highlight .mh { color: #06d6a0 } /* 十六进制数字 */
-.highlight .mi { color: #06d6a0 } /* 整数 */
-.highlight .mo { color: #06d6a0 } /* 八进制数字 */
-.highlight .sb { color: #06d6a0 } /* 字符串后引号 */
-.highlight .sc { color: #06d6a0 } /* 字符 */
-.highlight .sd { color: #06d6a0 } /* 文档字符串 */
-.highlight .s2 { color: #06d6a0 } /* 双引号字符串 */
-.highlight .se { color: #ef476f } /* 字符串转义 */
-.highlight .sh { color: #06d6a0 } /*  heredoc字符串 */
-.highlight .si { color: #ef476f } /* 插值字符串 */
-.highlight .sx { color: #06d6a0 } /* 其他字符串 */
-.highlight .sr { color: #38b000 } /* 正则表达式：亮绿 */
-.highlight .s1 { color: #06d6a0 } /* 单引号字符串 */
-.highlight .ss { color: #38b000 } /* 字符串符号：亮绿 */
-.highlight .bp { color: #d1d5db } /* 内置伪变量：浅灰 */
-.highlight .vc { color: #d1d5db } /* 类变量：浅灰 */
-.highlight .vg { color: #d1d5db } /* 全局变量：浅灰 */
-.highlight .vi { color: #d1d5db } /* 实例变量：浅灰 */
-.highlight .il { color: #06d6a0 } /* 长整数 */
+.highlight .c { color: #8d99ae; font-style: italic } /* 注释 */
+.highlight .err { color: #ff5252; background-color: rgba(255, 82, 82, 0.1) } /* 错误 */
+.highlight .k { color: #bb80b3; font-weight: bold } /* 关键字 */
+.highlight .o { color: #9ca3af; font-weight: bold } /* 运算符 */
+.highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #999999; font-weight: bold } /* Comment.Preproc */
+.highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .gd .x { color: #000000; background-color: #ffaaaa } /* Generic.Deleted.Specific */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #999999 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .gi .x { color: #000000; background-color: #aaffaa } /* Generic.Inserted.Specific */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #aaaaaa } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { font-weight: bold } /* Keyword.Constant */
+.highlight .kd { font-weight: bold } /* Keyword.Declaration */
+.highlight .kp { font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+.highlight .s { color: #06d6a0 } /* 字符串 */
+.highlight .m { color: #06d6a0 } /* 数字 */
+.highlight .na { color: #008080 } /* Name.Attribute */
+.highlight .nb { color: #0086B3 } /* Name.Builtin */
+.highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+.highlight .no { color: #008080 } /* Name.Constant */
+.highlight .ni { color: #800080 } /* Name.Entity */
+.highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+.highlight .nn { color: #555555 } /* Name.Namespace */
+.highlight .nt { color: #000080 } /* Name.Tag */
+.highlight .nv { color: #008080 } /* Name.Variable */
+.highlight .ow { font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #009999 } /* Literal.Number.Float */
+.highlight .mh { color: #009999 } /* Literal.Number.Hex */
+.highlight .mi { color: #009999 } /* Literal.Number.Integer */
+.highlight .mo { color: #009999 } /* Literal.Number.Oct */
+.highlight .sb { color: #d14 } /* Literal.String.Backtick */
+.highlight .sc { color: #d14 } /* Literal.String.Char */
+.highlight .sd { color: #d14 } /* Literal.String.Doc */
+.highlight .s2 { color: #d14 } /* Literal.String.Double */
+.highlight .se { color: #d14 } /* Literal.String.Escape */
+.highlight .sh { color: #d14 } /* Literal.String.Heredoc */
+.highlight .si { color: #d14 } /* Literal.String.Interpol */
+.highlight .sx { color: #d14 } /* Literal.String.Other */
+.highlight .sr { color: #009926 } /* Literal.String.Regex */
+.highlight .s1 { color: #d14 } /* Literal.String.Single */
+.highlight .ss { color: #990073 } /* Literal.String.Symbol */
+.highlight .bp { color: #999999 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #008080 } /* Name.Variable.Class */
+.highlight .vg { color: #008080 } /* Name.Variable.Global */
+.highlight .vi { color: #008080 } /* Name.Variable.Instance */
+.highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
