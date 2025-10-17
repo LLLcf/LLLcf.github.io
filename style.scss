@@ -632,18 +632,37 @@ nav {
     float: left;
     width: 50%;
     a {
-      color: $base-lighten-color;
-      border: 1px solid $divider-color;
+      color: $oc-grape-7; // 更改默认文字颜色为靛蓝色
+      border: 1px solid $oc-grape-3; // 更改默认边框颜色
       padding: 10px 20px;
       background: $background-color;
 
       &:hover, &:focus {
-        color: $link-lighten-color;
-        border: 1px solid $link-lighten-color;
-        background-color: $link-bghv-color;
+        color: $oc-grape-9; // 更改 hover 文字颜色为深靛蓝
+        border: 1px solid $oc-grape-5; // 更改 hover 边框颜色
+        background-color: $oc-grape-0; // 更改 hover 背景色为浅靛蓝
       }
     }
   }
+
+  > .next {
+    float: right;
+    text-align: right;
+    width: 50%;
+    a {
+      color: $oc-grape-7; // 更改默认文字颜色为靛蓝色
+      border: 1px solid $oc-grape-3; // 更改默认边框颜色
+      padding: 10px 20px;
+      background: $background-color;
+
+      &:hover, &:focus {
+        color: $oc-grape-9; // 更改 hover 文字颜色为深靛蓝
+        border: 1px solid $oc-grape-5; // 更改 hover 边框颜色
+        background-color: $oc-grape-0; // 更改 hover 背景色为浅靛蓝
+      }
+    }
+  }
+}
 
   > .next {
     float: right;
