@@ -1,4 +1,3 @@
-
 //
 // VARIABLES
 //
@@ -28,25 +27,25 @@ $base-font-size: 16px;
 $small-font-size: 14px;
 
 // Colors
-$base-color: $oc-gray-8;
-$base-lighten-color: $oc-gray-6;
+$base-color: $oc-white; // 基础文字颜色：白色（#ffffff），与黑色背景形成强对比
+$base-lighten-color: $oc-gray-3; // 辅助文字颜色：浅灰（#dee2e6）
 $base-lightener-color: $oc-gray-4;
 
-$background-color: $oc-gray-0;
+$background-color: $oc-gray-0; // 可根据实际黑色背景调整，如改为 $oc-gray-9
 $background-lighten-color: #f8f9fa6b;
 
-$text-color: $base-color;
-$link-color: $oc-blue-8;
-$link-lighten-color: $oc-blue-6;
-$link-bghv-color: $oc-blue-0;
-$divider-color: $oc-gray-1;
+$text-color: $base-color; // 正文文字颜色：继承主文字颜色
+$link-color: $oc-blue-3; // 链接颜色：亮蓝色（#72c3fc）
+$link-lighten-color: $oc-blue-2; // 链接hover颜色（#a3daff）
+$link-bghv-color: rgba(255, 255, 255, 0.1); // 链接hover背景：浅透明灰
+$divider-color: $oc-gray-8; // 分割线颜色：深灰（#343a40）
 
-$error-color:$oc-blue-8;
+$error-color: $oc-blue-8;
 
 $table-border-color: $oc-gray-2;
 $table-background-color: $oc-gray-1;
 
-$blockquote-color: $base-lighten-color;
+$blockquote-color: $oc-gray-4; // 引用块文字颜色：中浅灰（#ced4da）
 $blockquote-border-color: $oc-gray-3;
 
 $footnote-link-border-color: $oc-gray-1;
@@ -55,11 +54,11 @@ $footnote-link-background-over-color: $oc-gray-1;
 // $selection-color: $oc-black;
 $selection-background-color: $oc-gray-3;
 
-$tag-index-label-background-color: $oc-gray-2;
-$tag-index-count-background-color: #868e961a;
+$tag-index-label-background-color: $oc-gray-8; // 标签背景色：深灰
+$tag-index-count-background-color: rgba(255, 255, 255, 0.15); // 标签计数背景：透明浅灰
 
-$footer-border-color: $oc-gray-2;
-$footer-background-color: $oc-gray-0;
+$footer-border-color: $oc-gray-8; // 页脚边框：深灰
+$footer-background-color: $oc-gray-9; // 页脚背景：接近黑色（#212529）
 
 // List
 $li-bottom-space: 0.4em;
