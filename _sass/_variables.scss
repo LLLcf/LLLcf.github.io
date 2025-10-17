@@ -43,7 +43,7 @@ $divider-color: $oc-gray-8; // 分割线颜色：深灰（#343a40）
 
 $code-background-color: $oc-gray-9; // 代码块深色背景（接近黑色，与整体协调）
 $code-text-color: $oc-gray-1; // 代码默认文字色（浅灰，确保与深色背景对比）
-$code-highlight-bg: rgba(255, 255, 255, 0.05); // 代码高亮区域背景
+$code-inline-bg: rgba(255, 255, 255, 0.1);
 
 
 $error-color: $oc-blue-8;
