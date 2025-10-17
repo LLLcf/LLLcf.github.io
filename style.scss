@@ -319,7 +319,7 @@ img {
 //
 
 .wrapper-sidebar {
-  width: 30%;
+  width: 20%;
 	-webkit-background-size: cover;
 	background-size: cover;
 	background-color: $background-color;
@@ -339,7 +339,6 @@ img {
     border-right: 0;
   }
 }
-
 
 .sidebar {
   padding: 20px 0;
@@ -428,34 +427,13 @@ nav {
 
 // content
 
-// .wrapper-content {
-//   float: right;
-//   width: 70%;
-
-//   @include mobile {
-//     float: none;
-//     width: 100%;
-//   }
-// }
-
 .wrapper-content {
-  // 保留原布局属性（关键！）
   float: right;
-  width: 70%;
+  width: 80%;
 
-  // 添加背景样式
-  background-color: $background-color; /* 变量 fallback */
-  background-image: url('https://LLLcf.github.io/images/background.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; /* 覆盖内容区 */
-
-  // 移动端适配（保持布局正确）
   @include mobile {
     float: none;
     width: 100%;
-    // 移动端可调整背景（如取消固定背景）
-    background-attachment: scroll;
   }
 }
 
@@ -747,5 +725,3 @@ footer {
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
 //@import "gitalk";
-
-
