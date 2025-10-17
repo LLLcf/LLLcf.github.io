@@ -449,10 +449,11 @@ nav {
     text-align: right;
     font-weight: 300;
     letter-spacing: 1px;
-
+    color: $oc-grape-9; /* 使用预定义变量 */
+  
     @include mobile {
       margin: 0 10px;
-      color: $link-color;
+      color: $oc-grape-9; /* 保持一致 */
     }
   }
 }
