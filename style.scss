@@ -21,13 +21,25 @@ html {
 
 body {
   font-family: $base-font;
-  color: $text-color;
+  color: $base-color;
   line-height: 1.7em;
-  // 新增文字渲染优化
   -webkit-font-smoothing: antialiased; // WebKit浏览器抗锯齿
   -moz-osx-font-smoothing: grayscale; // Firefox在macOS上的优化
   text-rendering: optimizeLegibility; // 优化文字清晰度（优先可读性）
+  // 新增：整个页面的背景图片设置
+  background-color: $background-color; /* 背景色作为图片加载 fallback */
+  background-image: url('https://LLLcf.github.io/images/背景.png'); /* 背景图片路径 */
+  background-repeat: no-repeat; /* 禁止图片重复平铺 */
+  background-position: center center; /* 图片居中显示 */
+  background-size: cover; /* 覆盖整个页面，保持比例裁剪边缘 */
+  background-attachment: fixed; /* 背景固定，不随滚动移动 */
+
+  // 移动端适配：避免固定背景在部分手机上的显示问题
+  @include mobile {
+    background-attachment: scroll; /* 移动端背景随内容滚动 */
+  }
 }
+
 
 .container {
   margin: 0 auto;
