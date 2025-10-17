@@ -558,6 +558,7 @@ def main():
     tokenizer.save_pretrained(f"{output_dir}/final_tokenizer")
     print(f"模型已保存至 {output_dir}")
 ```
+
 ---
 
 #### 4.权重合并
@@ -573,7 +574,6 @@ tokenizer.save_pretrained("merged_model/Qwen3-Embedding-0.6B")
 ```
 ---
 
----
 #### 5.消融比较
 评估代码
 ```python
@@ -615,7 +615,6 @@ df = pd.DataFrame({
 ```
 ---
 
----
 #### 7.训练和评估结果
 
 | 学习率（Learning Rate）变化 | 梯度范数（Grad Norm）变化 |
