@@ -217,10 +217,10 @@ td, th {
   border: 1px solid $table-border-color;
 }
 
-tbody tr:nth-child(odd) td,
-tbody tr:nth-child(odd) th {
-  background-color: $table-background-color;
-}
+// tbody tr:nth-child(odd) td,
+// tbody tr:nth-child(odd) th {
+//   background-color: $table-background-color;
+// }
 
 // Blockquote
 blockquote {
