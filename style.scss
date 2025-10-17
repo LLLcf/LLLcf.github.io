@@ -343,19 +343,21 @@ img {
 .wrapper-sidebar {
   width: 30%;
   -webkit-background-size: cover;
-  background-size: cover;  /* 确保图片覆盖整个区域 */
-  background-color: $background-color;  /* 保留原背景色作为 fallback */
-  background-image: url('https://LLLcf.github.io/images/background.png');  /* 替换为你的图片路径 */
-  background-repeat: no-repeat;  /* 禁止图片重复 */
-  background-position: center;  /* 图片居中显示 */
+  background-size: cover;
+  background-color: $background-color; /* 保留变量作为 fallback */
+  background-image: url('https://LLLcf.github.io/images/background.png');
+  background-repeat: no-repeat;
+  background-position: center;
   height: 100%;
   top: 0;
   left: 0;
   position: fixed;
-  z-index: 4;
+  z-index: 4; /* 保持较高层级 */
   border-right: 1px solid $divider-color;
 
-  /* 移动端适配（保持原响应式逻辑） */
+  /* 侧边栏半透明背景（叠加在背景图上） */
+  background-color: rgba(255, 255, 255, 0.85);
+
   @include mobile {
     width: 100%;
     height: auto;
@@ -364,53 +366,6 @@ img {
     border-bottom: 1px solid $divider-color;
     border-right: 0;
   }
-}
-
-// 整个页面背景设置
-body {
-  /* 添加背景图片（替换为你的图片路径） */
-  background-image: url('https://LLLcf.github.io/images/background.png');
-  /* 确保背景覆盖整个页面 */
-  background-size: cover;
-  /* 背景固定，不随内容滚动 */
-  background-attachment: fixed;
-  /* 禁止背景重复 */
-  background-repeat: no-repeat;
-  /* 背景居中显示 */
-  background-position: center;
-  /* 背景图加载前的默认颜色 */
-  background-color: #f5f5f5;
-}
-
-// 增强文章内容可读性（为内容容器添加白色背景和阴影）
-.container {
-  /* 白色半透明背景（alpha值0.9可调整） */
-  background-color: rgba(255, 255, 255, 0.9);
-  /* 增加内边距，让内容不贴边 */
-  padding: 40px 60px;
-  /* 圆角边框增加美观度 */
-  border-radius: 8px;
-  /* 轻微阴影增强层次感 */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  /* 确保内容在背景之上 */
-  position: relative;
-  z-index: 2;
-}
-
-// 适配移动端（保持可读性）
-@include mobile {
-  .container {
-    padding: 20px 15px;
-    border-radius: 4px;
-  }
-}
-
-// 侧边栏调整（如果需要半透明效果）
-.wrapper-sidebar {
-  /* 侧边栏半透明背景（可选，根据背景图调整） */
-  background-color: rgba(255, 255, 255, 0.85);
-  /* 确保侧边栏在背景之上 */
-  z-index: 3;
 }
 
 
