@@ -318,16 +318,40 @@ img {
 // .sidebar
 //
 
+// .wrapper-sidebar {
+//   width: 25%;
+// 	-webkit-background-size: cover;
+// 	background-size: cover;
+// 	background-color: $background-color;
+// 	height: 100%;
+// 	top: 0;
+// 	left:0;
+// 	position: fixed;
+// 	z-index: 4;
+//   border-right: 1px solid $divider-color;
+
+//   @include mobile {
+//     width: 100%;
+//     height: auto;
+//     padding-bottom: 24px;
+//     position: relative;
+//     border-bottom: 1px solid $divider-color;
+//     border-right: 0;
+//   }
+// }
+
 .wrapper-sidebar {
   width: 25%;
-	-webkit-background-size: cover;
-	background-size: cover;
-	background-color: $background-color;
-	height: 100%;
-	top: 0;
-	left:0;
-	position: fixed;
-	z-index: 4;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-color: $background-color;
+  background-position: center; /* 新增：使背景图居中显示 */
+  background-repeat: no-repeat; /* 新增：防止背景图重复 */
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 4;
   border-right: 1px solid $divider-color;
 
   @include mobile {
@@ -337,6 +361,7 @@ img {
     position: relative;
     border-bottom: 1px solid $divider-color;
     border-right: 0;
+    background-position: center top; /* 移动端也保持居中 */
   }
 }
 
