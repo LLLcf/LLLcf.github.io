@@ -21,8 +21,12 @@ html {
 
 body {
   font-family: $base-font;
-  color: $base-color;
+  color: $text-color;
   line-height: 1.7em;
+  // 新增文字渲染优化
+  -webkit-font-smoothing: antialiased; // WebKit浏览器抗锯齿
+  -moz-osx-font-smoothing: grayscale; // Firefox在macOS上的优化
+  text-rendering: optimizeLegibility; // 优化文字清晰度（优先可读性）
 }
 
 .container {
@@ -477,7 +481,7 @@ nav {
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
-  opacity: 0.9;
+  opacity: 1;
 
   // 移动端适配
   @include mobile {
