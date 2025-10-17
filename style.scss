@@ -348,7 +348,7 @@ img {
   background-image: url('https://LLLcf.github.io/images/猫咪.png');
   background-position: center; /* 新增：使背景图居中显示 */
   background-repeat: no-repeat; /* 新增：防止背景图重复 */
-  opacity: 0.5;
+  opacity: 0.9;
   height: 100%;
   top: 0;
   left: 0;
@@ -477,7 +477,7 @@ nav {
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
-  opacity: 0.85;
+  opacity: 0.9;
 
   // 移动端适配
   @include mobile {
