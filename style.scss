@@ -345,6 +345,7 @@ img {
   -webkit-background-size: cover;
   background-size: cover;
   background-color: $background-color;
+  background-image: url('https://LLLcf.github.io/images/猫咪.png');
   background-position: center; /* 新增：使背景图居中显示 */
   background-repeat: no-repeat; /* 新增：防止背景图重复 */
   height: 100%;
@@ -470,12 +471,12 @@ nav {
 
   // 优化背景样式
   background-color: $background-color;
-  background-image: url('https://LLLcf.github.io/images/background.png');
+  background-image: url('https://LLLcf.github.io/images/背景.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
-  opacity: 0.8;
+  opacity: 0.85;
 
   // 移动端适配
   @include mobile {
