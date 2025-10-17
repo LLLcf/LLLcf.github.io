@@ -12,7 +12,7 @@ navigation:
   - name: 分类
     url: /tags
 
-paginate: 8
+paginate: 6
 
 excerpt_separator: <!-- more -->
 
