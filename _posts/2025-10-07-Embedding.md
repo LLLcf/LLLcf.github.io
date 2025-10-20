@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "1.Embedding-从过去到现在"
+title: "1.Embedding-传统词频到预训练语义表示"
 date:   2025-10-07
 tags: [NLP]
 comments: true
