@@ -422,17 +422,17 @@ img {
 
 .site-name {
   margin: 0 auto;
-  color: $oc-grape-9; // 改为葡萄紫色（深色）
+  color: $oc-gray-9; // 改为葡萄紫色（深色）
   cursor: pointer;
   font-family: $base-font;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 36px;
   letter-spacing: 1px;
 }
 
 .site-description {
   margin: 15px auto;
-  color: $oc-grape-9; // 改为葡萄色系深色
+  color: $oc-gray-9; // 改为葡萄色系深色
   font-size: 20px;
 
   @include mobile {
@@ -461,11 +461,11 @@ nav {
     text-align: right;
     font-weight: 300;
     letter-spacing: 1px;
-    color: $oc-grape-9; /* 使用预定义变量 */
+    color: $oc-gray-9; /* 使用预定义变量 */
   
     @include mobile {
       margin: 0 10px;
-      color: $oc-grape-9; /* 保持一致 */
+      color: $oc-gray-9; /* 保持一致 */
     }
   }
 }
