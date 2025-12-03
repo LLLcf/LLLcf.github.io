@@ -1,13 +1,11 @@
 ---
 layout: post
 title: "GPT和Qwen系列"
-date:   2025-07-05
+date: 2025-10-02
 tags: [论文]
 comments: true
 author: 炼丹怪
 ---
-
-# GPT系列到Qwen系列
 
 ## 1. GPT系列：生成式预训练的奠基与扩张
 
