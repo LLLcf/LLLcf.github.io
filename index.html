@@ -40,8 +40,47 @@ layout: default
 {% endif %}
 
 <div class="posts">
+  <!-- 置顶文章 -->
+  {% assign pinned_posts = site.posts | where: "pinned", true %}
+  {% if pinned_posts.size > 0 and paginator.page == 1 %}
+    {% for post in pinned_posts %}
+    {% unless post.draft %}
+      <article class="post pinned-post">
+        <h1>
+          <span class="pinned-icon">📌</span>
+          <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+          <span class="pinned-label">置顶</span>
+        </h1>
+
+        <div class="meta">
+          <span class="date">
+            {{ post.date | date: "%Y-%m-%d" }}
+          </span>
+
+          <ul class="tag">
+            {% for tag in post.tags %}
+            <li>
+              <a href="{{ site.url }}{{ site.baseurl }}/tags#{{ tag }}">
+                {{ tag }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="entry">
+          {{ post.excerpt | truncate: 200 }}
+        </div>
+
+        <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+      </article>
+    {% endunless %}
+    {% endfor %}
+  {% endif %}
+
+  <!-- 普通文章 -->
   {% for post in paginator.posts %}
-  {% unless post.draft %}
+  {% unless post.draft or post.pinned %}
     <article class="post">
       <h1>
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
