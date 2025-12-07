@@ -566,9 +566,21 @@ nav {
     margin-top: 10px;
   }
 
-  .read-more {
-    font-size: 15px;
+.read-more {
+  font-size: 15px;
+  color: $link-color;
+  text-decoration: none;
+  border: 1px solid $link-color;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: $link-color;
+    color: white;
   }
+}
+
 }
 
 .page {
