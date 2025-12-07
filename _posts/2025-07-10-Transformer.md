@@ -7,6 +7,10 @@ comments: true
 author: 炼丹怪
 ---
 
+Transformer架构通过摒弃递归与卷积，仅依赖注意力机制，成功解决了序列建模中的并行计算与长距离依赖难题。其核心组件包含多头注意力、位置编码及前馈网络。作为现代大语言模型（LLM）的基石，它凭借极强的通用性与扩展性，通过RoPE、SwiGLU等技术演进，彻底重塑了NLP领域的技术范式。
+
+---
+
 ## 1. 绪论：序列建模的历史转折与范式革命
 
 2017年，Google Brain团队发表《Attention Is All You Need》，标志着NLP领域进入Transformer时代。在此之前，RNN（LSTM/GRU）是主流范式。本报告对该架构进行从数学原理到演进影响的穷尽式剖析。

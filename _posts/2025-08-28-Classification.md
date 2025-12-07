@@ -7,10 +7,15 @@ comments: true
 author: 炼丹怪
 ---
 
+该方案针对违禁词分类的不均衡样本挑战，基于Chinese-RoBERTa-wwm-ext模型，采用了FGM对抗训练、多层输出拼接及Focal Loss/Rdrop等组合损失策略。通过五折交叉验证与基于置信度的二阶段多模型融合机制，有效提升了长尾类别识别效果。
+
+---
+
 ##### *初赛第二名技术方案*
 
 *比赛链接*：[基于文本的违禁词分类挑战赛](https://challenge.xfyun.cn/topic/info?type=prohibited-words-classification)
 
+---
 
 ## 1. 前置数据分析
 

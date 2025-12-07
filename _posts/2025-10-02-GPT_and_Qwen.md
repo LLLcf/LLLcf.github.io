@@ -2,9 +2,13 @@
 layout: post
 title: "GPT和Qwen系列"
 date: 2025-10-02
-tags: [论文]
+tags: [LLM]
 comments: true
 author: 炼丹怪
+---
+
+本文解析了GPT与Qwen系列的演进历程。GPT系列确立了预训练范式与Scaling Law，引领了从文本生成到多模态推理的突破；Qwen系列作为开源先锋，凭借MoE架构、海量数据及“思维预算”机制，在效率与逻辑推理上实现飞跃。两者共同推动了LLM向通用人工智能的加速迈进。
+
 ---
 
 ## 1. GPT系列：生成式预训练的开始
