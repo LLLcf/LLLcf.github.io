@@ -11,6 +11,8 @@ Transformer架构通过摒弃递归与卷积，仅依赖注意力机制，成功
 
 ---
 
+<!-- more -->
+
 ## 1. 绪论：序列建模的历史转折与范式革命
 
 2017年，Google Brain团队发表《Attention Is All You Need》，标志着NLP领域进入Transformer时代。在此之前，RNN（LSTM/GRU）是主流范式。本报告对该架构进行从数学原理到演进影响的穷尽式剖析。

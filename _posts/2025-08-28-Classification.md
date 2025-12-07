@@ -11,6 +11,8 @@ author: 炼丹怪
 
 ---
 
+<!-- more -->
+
 ##### *初赛第二名技术方案*
 
 *比赛链接*：[基于文本的违禁词分类挑战赛](https://challenge.xfyun.cn/topic/info?type=prohibited-words-classification)
