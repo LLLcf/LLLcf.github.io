@@ -21,23 +21,36 @@ $georgia: Georgia, serif;
 // Fonts
 // _variables.scss 中修改 $base-font 变量
 $base-font: 
-  "仿宋",          // Windows 系统默认仿宋
-  "仿宋_GB2312",   // Windows 经典仿宋（兼容性更强）
-  "PingFang SC",   // macOS 无原生仿宋，用苹方（接近衬线风格）替代
-  "WenQuanYi Zen Hei", // Linux 系统后备
-  "Noto Serif", 
-  "PT Serif", 
-  source-han-serif-sc, 
-  "Source Han Serif SC", 
-  "Source Han Serif CN", 
-  "Source Han Serif TC", 
-  "Source Han Serif TW", 
-  "Source Han Serif",
-  "Songti SC", 
-  SimSon, 
-  serif; // 最终衬线字体后备
+  // macOS 优先字体
+  "PingFang SC",            // macOS 现代字体，清晰易读
+  "Songti SC",              // macOS 宋体（衬线字体）
+  "-apple-system",          // macOS 系统字体回退
+  "BlinkMacSystemFont",     // macOS 系统字体
+  
+  // Windows 优先字体
+  "Microsoft YaHei",        // Windows 微软雅黑（无衬线字体）
+  "SimSun",                 // Windows 宋体（衬线字体）
+  "Segoe UI",               // Windows 系统界面字体
+  
+  // 跨平台通用字体
+  "Helvetica Neue",         // 经典无衬线字体
+  "Helvetica",              // 经典无衬线字体
+  "Arial",                  // 通用无衬线字体
+  "Noto Sans SC",           // Google 开源字体，支持简体中文
+  "Noto Serif SC",          // Google 开源衬线字体，支持简体中文
+  
+  // 衬线字体备选
+  "Times New Roman",        // 经典衬线字体
+  "Times",                  // 经典衬线字体
+  "serif";                  // 衬线字体通配
 
-$code-font: 'Courier New', 'Arial', 'Menlo', 'Spoqa Han Sans', monospace;
+$code-font: 
+  "Fira Code",              // 程序员专用等宽字体，支持连字
+  "Menlo",                  // macOS 默认等宽字体
+  "Monaco",                 // macOS 经典等宽字体
+  "Consolas",               // Windows 优质等宽字体
+  "Courier New",            // 通用等宽字体
+  "monospace";              // 等宽字体通配
 
 // Font sizes
 $base-font-size: 16px;
