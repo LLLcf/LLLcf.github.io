@@ -57,27 +57,48 @@ author: 炼丹怪
 考虑神经网络中的第 $l$ 层，其参数为权重矩阵 $\mathbf{W}_l$ 和偏置向量 $\mathbf{b}_l$。
 
 1.输入激活值：
-$$\mathbf{a}_{l-1} \in \mathbb{R}^{d_{in}}$$
+
+$$\
+mathbf{a}_{l-1} \in \mathbb{R}^{d_{in}}
+$$
 
 2.线性变换输出：
-$$\mathbf{z}_l = \mathbf{W}_l \mathbf{a}_{l-1} + \mathbf{b}_l$$
+
+$$
+\mathbf{z}_l = \mathbf{W}_l \mathbf{a}_{l-1} + \mathbf{b}_l
+$$
 
 其中
-$$\mathbf{W}_l \in \mathbb{R}^{d_{out} \times d_{in}}$$
+
+$$
+\mathbf{W}_l \in \mathbb{R}^{d_{out} \times d_{in}}
+$$
 
 3.非线性激活：
-$$\mathbf{a}_l = \sigma(\mathbf{z}_l)$$
+
+$$
+\mathbf{a}_l = \sigma(\mathbf{z}_l)
+$$
 
 损失函数为 $L$。我们的目标是计算
-$$\frac{\partial L}{\partial \mathbf{W}_l}$$
+
+$$
+\frac{\partial L}{\partial \mathbf{W}_l}
+$$
+
 和
-$$\frac{\partial L}{\partial \mathbf{b}_l}$$
+
+$$
+\frac{\partial L}{\partial \mathbf{b}_l}
+$$
 
 #### 2.2.2 误差项（Error Term）的定义
 
 引入误差项 $\boldsymbol{\delta}_l$，定义为损失函数相对于该层线性输出 $\mathbf{z}_l$ 的梯度：
 
-$$\boldsymbol{\delta}_l \triangleq \frac{\partial L}{\partial \mathbf{z}_l} \in \mathbb{R}^{d_{out}}$$
+$$
+\boldsymbol{\delta}_l \triangleq \frac{\partial L}{\partial \mathbf{z}_l} \in \mathbb{R}^{d_{out}}
+$$
 
 （注意：此处采用分母布局，梯度形状与原变量一致）
 
@@ -85,27 +106,37 @@ $$\boldsymbol{\delta}_l \triangleq \frac{\partial L}{\partial \mathbf{z}_l} \in 
 
 根据链式法则，损失相对于权重矩阵 $\mathbf{W}_l$ 的梯度可以分解为：
 
-$$\frac{\partial L}{\partial \mathbf{W}_l} = \frac{\partial L}{\partial \mathbf{z}_l} \cdot \frac{\partial \mathbf{z}_l}{\partial \mathbf{W}_l}$$
+$$
+\frac{\partial L}{\partial \mathbf{W}_l} = \frac{\partial L}{\partial \mathbf{z}_l} \cdot \frac{\partial \mathbf{z}_l}{\partial \mathbf{W}_l}
+$$
 
 这里涉及张量对矩阵的导数，直接处理较为困难。我们采用迹（Trace）技巧或逐元素推导来通过维度匹配验证结果。
 
 考虑 $\mathbf{z}_l$ 的第 $i$ 个分量 $z_i$：
 
-$$z_i = \sum_{j} W_{ij} a_{j} + b_i$$
+$$
+z_i = \sum_{j} W_{ij} a_{j} + b_i
+$$
 
 （为简化，省略层级下标 $l$ 和 $l-1$）
 
 计算偏导数：
 
-$$\frac{\partial L}{\partial W_{ij}} = \sum_{k} \frac{\partial L}{\partial z_k} \frac{\partial z_k}{\partial W_{ij}}$$
+$$
+\frac{\partial L}{\partial W_{ij}} = \sum_{k} \frac{\partial L}{\partial z_k} \frac{\partial z_k}{\partial W_{ij}}
+$$
 
 由于 $z_k$ 只在 $k=i$ 时包含 $W_{ij}$，求和项中仅一项非零：
 
-$$\frac{\partial L}{\partial W_{ij}} = \delta_i \cdot a_j$$
+$$
+\frac{\partial L}{\partial W_{ij}} = \delta_i \cdot a_j
+$$
 
 将上述标量结果重新组合成矩阵形式，可以发现 $\frac{\partial L}{\partial \mathbf{W}}$ 的 $(i,j)$ 元素是 $\delta_i$ 与 $a_j$ 的乘积。这对应于向量的外积（Outer Product）：
 
-$$\frac{\partial L}{\partial \mathbf{W}_l} = \boldsymbol{\delta}_l \mathbf{a}_{l-1}^\top$$
+$$
+\frac{\partial L}{\partial \mathbf{W}_l} = \boldsymbol{\delta}_l \mathbf{a}_{l-1}^\top
+$$
 
 这一公式是所有神经网络训练的基础。它告诉我们，权重的更新方向是由当前层的误差信号 $\boldsymbol{\delta}_l$ 和上一层的输入信号 $\mathbf{a}_{l-1}$ 的相关性决定的。这也是为何输入数据的归一化（Normalization）如此重要——它直接影响了梯度矩阵的数值稳定性。
 
@@ -113,7 +144,9 @@ $$\frac{\partial L}{\partial \mathbf{W}_l} = \boldsymbol{\delta}_l \mathbf{a}_{l
 
 为了计算 $\boldsymbol{\delta}_l$，我们需要从后一层 $\boldsymbol{\delta}_{l+1}$ 递推回来。
 
-$$\boldsymbol{\delta}_l = \frac{\partial L}{\partial \mathbf{z}_l} = \left( \frac{\partial \mathbf{z}_{l+1}}{\partial \mathbf{z}_l} \right)^\top \frac{\partial L}{\partial \mathbf{z}_{l+1}}$$
+$$
+\boldsymbol{\delta}_l = \frac{\partial L}{\partial \mathbf{z}_l} = \left( \frac{\partial \mathbf{z}_{l+1}}{\partial \mathbf{z}_l} \right)^\top \frac{\partial L}{\partial \mathbf{z}_{l+1}}
+$$
 
 分解中间过程：
 
@@ -241,7 +274,19 @@ Adam 的物理意义在于：它根据梯度的**信噪比（Signal-to-Noise Rat
 
 ### 4.4 AdamW：解耦权重衰减的革命
 
-在很长一段时间里，人们认为 L2 正则化（在损失函数中加 $\frac{\lambda}{2} ||\mathbf{w}||^2$）和权重衰减（在更新公式中减去 $\eta \lambda \mathbf{w}$）是等价的。这对于 SGD 确实成立。然而，Loshchilov 和 Hutter 在 2017 年指出，对于自适应算法（如 Adam），两者并不等价。
+在很长一段时间里，人们认为 L2 正则化:
+
+在损失函数中加 
+
+$$\frac{\lambda}{2} ||\mathbf{w}||^2$$
+
+和权重衰减:
+
+在更新公式中减去 
+
+$$\eta \lambda \mathbf{w}$$
+
+是等价的。这对于 SGD 确实成立。然而，Loshchilov 和 Hutter 在 2017 年指出，对于自适应算法（如 Adam），两者并不等价。
 
 如果将 L2 正则项加入损失函数，其梯度 $\lambda \mathbf{w}$ 会被混入 $\mathbf{g}_t$ 中，进而被归一化项 $\sqrt{\hat{\mathbf{v}}_t}$ 缩放：
 
@@ -278,8 +323,9 @@ $$\gamma_l = \frac{||\mathbf{w}_l||}{||\nabla L_l|| + \beta ||\mathbf{w}_l||}$$
 更新逻辑：
 
 1.  计算 Adam 风格的更新步 $\mathbf{r}_t$。
-2.  计算层级信任比率 $\phi_l = ||\mathbf{w}_l|| / ||\mathbf{r}_t||$。
-3.  实际更新：$\mathbf{w}_{t+1} = \mathbf{w}_t - \eta \cdot \phi_l \cdot \mathbf{r}_t$。
+2.  计算层级信任比率 
+3.  $$\phi_l = ||\mathbf{w}_l|| / ||\mathbf{r}_t||$$
+4.  实际更新：$\mathbf{w}_{t+1} = \mathbf{w}_t - \eta \cdot \phi_l \cdot \mathbf{r}_t$。
 
 LAMB 使得 BERT 的预训练批次大小可以达到 64k 甚至更大，将训练时间从 3 天缩短至 76 分钟。其核心贡献在于证明了：在大规模并行下，层级自适应（Layer-wise Adaptation）比逐元素自适应（Element-wise Adaptation）更能维持训练稳定性。
 
@@ -344,7 +390,6 @@ AdamW、Lion 等算法在处理权重矩阵 $\mathbf{W} \in \mathbb{R}^{d_{out} 
 ### 7.2 Muon 核心原理：牛顿-舒尔茨正交化
 
 
-
 Muon 专门针对**线性层（Linear Layers）**的二维矩阵参数设计。其核心思想是：将动量矩阵 $\mathbf{M}_t$ 强制投影到正交矩阵流形上，作为更新方向。
 
 #### 7.2.1 算法流程
@@ -359,16 +404,32 @@ Muon 专门针对**线性层（Linear Layers）**的二维矩阵参数设计。�
     然而，SVD 在 GPU 上计算极其昂贵且难以并行。Muon 使用了**牛顿-舒尔茨迭代（Newton-Schulz Iteration）**来高效逼近这一过程。
 
     **Newton-Schulz 迭代公式**：
-    * 令 $\mathbf{X}_0 = \frac{\mathbf{M}_t}{||\mathbf{M}_t||_{spec}}$（谱范数归一化）。
-    * 迭代 $k$ 次（通常 $k=5$）：
-        $$\mathbf{X}_{k+1} = \frac{1}{2} \mathbf{X}_k (3\mathbf{I} - \mathbf{X}_k^\top \mathbf{X}_k)$$
-    * 最终 $\mathbf{O}_t = \mathbf{X}_k$。
 
-    该迭代仅涉及矩阵乘法（MatMul），非常适合利用 GPU/TPU 的 Tensor Cores。
+谱范数归一化
 
-3.  **参数更新**：
-    $$\mathbf{W}_{t+1} = \mathbf{W}_t - \eta \cdot \alpha_t \cdot \mathbf{O}_t$$
-    其中 $\alpha_t$ 是特定的缩放因子（通常基于 RMS），用于恢复更新的幅度。
+$$
+\mathbf{X}_0 = \frac{\mathbf{M}_t}{||\mathbf{M}_t||_{spec}}
+$$
+
+迭代 $k$ 次（通常 $k=5$）：
+
+$$
+\mathbf{X}_{k+1} = \frac{1}{2} \mathbf{X}_k (3\mathbf{I} - \mathbf{X}_k^\top \mathbf{X}_k)
+$$
+
+最终 
+
+$$\mathbf{O}_t = \mathbf{X}_k$$
+
+该迭代仅涉及矩阵乘法（MatMul），非常适合利用 GPU/TPU 的 Tensor Cores。
+
+**参数更新**：
+
+$$
+\mathbf{W}_{t+1} = \mathbf{W}_t - \eta \cdot \alpha_t \cdot \mathbf{O}_t
+$$
+
+其中 $\alpha_t$ 是特定的缩放因子（通常基于 RMS），用于恢复更新的幅度。
 
 #### 7.2.2 为什么正交化有效？
 
