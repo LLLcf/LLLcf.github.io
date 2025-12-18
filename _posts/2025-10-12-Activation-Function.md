@@ -56,27 +56,48 @@ author: 炼丹怪
 考虑神经网络中的第 $l$ 层，其参数为权重矩阵 $W_l$ 和偏置向量 $b_l$。
 
 1.输入激活值：
-$$a_{l-1} \in R^{d_{in}}$$
+
+$$
+a_{l-1} \in R^{d_{in}}
+$$
 
 2.线性变换输出：
-$$z_l = W_l a_{l-1} + b_l$$
+
+$$
+z_l = W_l a_{l-1} + b_l
+$$
 
 其中
-$$W_l \in R^{d_{out} \times d_{in}}$$
+
+$$
+W_l \in R^{d_{out} \times d_{in}}
+$$
 
 3.非线性激活：
-$$a_l = \sigma(z_l)$$
+
+$$
+a_l = \sigma(z_l)
+$$
 
 损失函数为 $L$。我们的目标是计算
-$$\frac{\partial L}{\partial W_l}$$
+
+$$
+\frac{\partial L}{\partial W_l}
+$$
+
 和
-$$\frac{\partial L}{\partial b_l}$$
+
+$$
+\frac{\partial L}{\partial b_l}
+$$
 
 #### 2.2.2 误差项（Error Term）的定义
 
 引入误差项 $\delta_l$，定义为损失函数相对于该层线性输出 $z_l$ 的梯度：
 
-$$\delta_l \triangleq \frac{\partial L}{\partial z_l} \in R^{d_{out}}$$
+$$
+\delta_l \triangleq \frac{\partial L}{\partial z_l} \in R^{d_{out}}
+$$
 
 （注意：此处采用分母布局，梯度形状与原变量一致）
 
@@ -84,27 +105,37 @@ $$\delta_l \triangleq \frac{\partial L}{\partial z_l} \in R^{d_{out}}$$
 
 根据链式法则，损失相对于权重矩阵 $W_l$ 的梯度可以分解为：
 
-$$\frac{\partial L}{\partial W_l} = \frac{\partial L}{\partial z_l} \cdot \frac{\partial z_l}{\partial W_l}$$
+$$
+\frac{\partial L}{\partial W_l} = \frac{\partial L}{\partial z_l} \cdot \frac{\partial z_l}{\partial W_l}
+$$
 
 这里涉及张量对矩阵的导数，直接处理较为困难。我们采用迹（Trace）技巧或逐元素推导来通过维度匹配验证结果。
 
 考虑 $z_l$ 的第 $i$ 个分量 $z_i$：
 
-$$z_i = \sum_{j} W_{ij} a_{j} + b_i$$
+$$
+z_i = \sum_{j} W_{ij} a_{j} + b_i
+$$
 
 （为简化，省略层级下标 $l$ 和 $l-1$）
 
 计算偏导数：
 
-$$\frac{\partial L}{\partial W_{ij}} = \sum_{k} \frac{\partial L}{\partial z_k} \frac{\partial z_k}{\partial W_{ij}}$$
+$$
+\frac{\partial L}{\partial W_{ij}} = \sum_{k} \frac{\partial L}{\partial z_k} \frac{\partial z_k}{\partial W_{ij}}
+$$
 
 由于 $z_k$ 只在 $k=i$ 时包含 $W_{ij}$，求和项中仅一项非零：
 
-$$\frac{\partial L}{\partial W_{ij}} = \delta_i \cdot a_j$$
+$$
+\frac{\partial L}{\partial W_{ij}} = \delta_i \cdot a_j
+$$
 
 将上述标量结果重新组合成矩阵形式，可以发现 $\frac{\partial L}{\partial W}$ 的 $(i,j)$ 元素是 $\delta_i$ 与 $a_j$ 的乘积。这对应于向量的外积（Outer Product）：
 
-$$\frac{\partial L}{\partial W_l} = \delta_l a_{l-1}^\top$$
+$$
+\frac{\partial L}{\partial W_l} = \delta_l a_{l-1}^\top
+$$
 
 这一公式是所有神经网络训练的基础。它告诉我们，权重的更新方向是由当前层的误差信号 $\delta_l$ 和上一层的输入信号 $a_{l-1}$ 的相关性决定的。这也是为何输入数据的归一化（Normalization）如此重要——它直接影响了梯度矩阵的数值稳定性。
 
@@ -112,25 +143,37 @@ $$\frac{\partial L}{\partial W_l} = \delta_l a_{l-1}^\top$$
 
 为了计算 $\delta_l$，我们需要从后一层 $\delta_{l+1}$ 递推回来。
 
-$$\delta_l = \frac{\partial L}{\partial z_l} = \left( \frac{\partial z_{l+1}}{\partial z_l} \right)^\top \frac{\partial L}{\partial z_{l+1}}$$
+$$
+\delta_l = \frac{\partial L}{\partial z_l} = \left( \frac{\partial z_{l+1}}{\partial z_l} \right)^\top \frac{\partial L}{\partial z_{l+1}}
+$$
 
 分解中间过程：
 
-$$z_{l+1} = W_{l+1} \sigma(z_l) + b_{l+1}$$
+$$
+z_{l+1} = W_{l+1} \sigma(z_l) + b_{l+1}
+$$
 
 应用全微分或雅可比矩阵乘法：
 
-$$\frac{\partial z_{l+1}}{\partial z_l} = W_{l+1} \cdot \text{diag}(\sigma'(z_l))$$
+$$
+\frac{\partial z_{l+1}}{\partial z_l} = W_{l+1} \cdot \text{diag}(\sigma'(z_l))
+$$
 
 因此，误差传播公式为：
 
-$$\delta_l = \left( W_{l+1} \text{diag}(\sigma'(z_l)) \right)^\top \delta_{l+1}$$
+$$
+\delta_l = \left( W_{l+1} \text{diag}(\sigma'(z_l)) \right)^\top \delta_{l+1}
+$$
 
-$$\delta_l = \text{diag}(\sigma'(z_l)) W_{l+1}^\top \delta_{l+1}$$
+$$
+\delta_l = \text{diag}(\sigma'(z_l)) W_{l+1}^\top \delta_{l+1}
+$$
 
 在逐元素运算符号 $\odot$ 下，这通常写作：
 
-$$\delta_l = (W_{l+1}^\top \delta_{l+1}) \odot \sigma'(z_l)$$
+$$
+\delta_l = (W_{l+1}^\top \delta_{l+1}) \odot \sigma'(z_l)
+$$
 
 ### 2.3 批量（Batch）计算的矩阵化
 
