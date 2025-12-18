@@ -31,6 +31,8 @@ author: 炼丹怪
 
 ### 2.1 自动微分（AD）的两种模式与计算图
 
+
+
 在讨论反向传播之前，必须明确其在数值计算领域的定位。计算梯度的计算机方法主要有三种：数值微分（Finite Difference）、符号微分（Symbolic Differentiation）和自动微分（Automatic Differentiation, AD）。深度学习完全依赖于自动微分。
 
 自动微分的核心在于将复杂的复合函数分解为一系列基本运算操作（加法、乘法、激活函数等），构建计算图。根据导数传播的方向，AD 分为前向模式（Forward-Mode）和反向模式（Reverse-Mode）。
@@ -52,11 +54,22 @@ author: 炼丹怪
 
 考虑神经网络中的第 $l$ 层，其参数为权重矩阵 $\mathbf{W}_l$ 和偏置向量 $\mathbf{b}_l$。
 
-* 输入激活值：$\mathbf{a}_{l-1} \in \mathbb{R}^{d_{in}}$
-* 线性变换输出：$\mathbf{z}_l = \mathbf{W}_l \mathbf{a}_{l-1} + \mathbf{b}_l$，其中 $\mathbf{W}_l \in \mathbb{R}^{d_{out} \times d_{in}}$
-* 非线性激活：$\mathbf{a}_l = \sigma(\mathbf{z}_l)$
+1.输入激活值：
+$$\mathbf{a}_{l-1} \in \mathbb{R}^{d_{in}}$$
 
-损失函数为 $L$。我们的目标是计算 $\frac{\partial L}{\partial \mathbf{W}_l}$ 和 $\frac{\partial L}{\partial \mathbf{b}_l}$。
+2.线性变换输出：
+$$\mathbf{z}_l = \mathbf{W}_l \mathbf{a}_{l-1} + \mathbf{b}_l$$
+
+其中
+$$\mathbf{W}_l \in \mathbb{R}^{d_{out} \times d_{in}}$$
+
+3.非线性激活：
+$$\mathbf{a}_l = \sigma(\mathbf{z}_l)$$
+
+损失函数为 $L$。我们的目标是计算
+$$\frac{\partial L}{\partial \mathbf{W}_l}$$
+和
+$$\frac{\partial L}{\partial \mathbf{b}_l}$$
 
 #### 2.2.2 误差项（Error Term）的定义
 
@@ -133,6 +146,8 @@ $$\frac{\partial L}{\partial \mathbf{W}_l} = \frac{1}{B} \boldsymbol{\Delta}_l^\
 ## 3. 随机梯度下降（SGD）与动量机制：从山谷到平原
 
 拥有了梯度，优化的征程才刚刚开始。损失函数的几何景观（Geometry of Loss Landscape）决定了我们该如何利用梯度。
+
+
 
 ### 3.1 随机梯度下降（SGD）的动力学特征
 
@@ -325,6 +340,8 @@ AdamW、Lion 等算法在处理权重矩阵 $\mathbf{W} \in \mathbb{R}^{d_{out} 
 在深度线性网络理论中，为了使信号在深层网络中无损传播，权重矩阵应保持等距性（Isometry），即其奇异值应集中在 1 附近。如果某些奇异值过大或过小，信号会在前向/反向传播中发生爆炸或消失。标准的梯度下降并不保证更新后的矩阵保持良好的谱分布。
 
 ### 7.2 Muon 核心原理：牛顿-舒尔茨正交化
+
+
 
 Muon 专门针对**线性层（Linear Layers）**的二维矩阵参数设计。其核心思想是：将动量矩阵 $\mathbf{M}_t$ 强制投影到正交矩阵流形上，作为更新方向。
 
