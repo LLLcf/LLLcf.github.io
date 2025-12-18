@@ -179,7 +179,9 @@ $$
 
 在实际训练中，我们处理的是小批量（Mini-batch）数据 $X \in R^{B \times d_{in}}$。此时，梯度计算变为矩阵乘法，极大地利用了 GPU 的并行能力。
 
-$$\frac{\partial L}{\partial W_l} = \frac{1}{B} \Delta_l^\top A_{l-1}$$
+$$
+\frac{\partial L}{\partial W_l} = \frac{1}{B} \Delta_l^\top A_{l-1}
+$$
 
 其中 $\Delta_l \in R^{B \times d_{out}}$ 是批量误差矩阵，$A_{l-1} \in R^{B \times d_{in}}$ 是批量输入矩阵。注意这里的转置位置，取决于数据是行优先还是列优先存储。
 
